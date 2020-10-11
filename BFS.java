@@ -1,3 +1,3 @@
 public class BFS{
-    /// author: Hanna
+    // main application
 }
