@@ -11,10 +11,12 @@ You are given an undirected unweighted graph G, which represents a city’s road
 ## Instruction to clone this repository
 #### For the first time access to this project:
 - open cmd and change directory to the folder you want to add this project to
-- `git clone https://github.com/taquynhnga2001/cz2001-lab2.git` and then `enter`
+- `git clone https://github.com/taquynhnga2001/cz2001-lab2.git` and then press Enter
+- change directory to `cz2001-lab2`
 - `git remote add orgin https://github.com/taquynhnga2001/cz2001-lab2.git`
+- `git init`
 #### From later access to the project:
 - open cmd and change directory to the project folder `cz2001-lab2`
 - `git pull origin main` to update the latest changes of the project. After that, you can update the project.
-- `git add .` and then `git commit -m 'commit message what you updated'` after making any changes to the project.
+- `git add .` and then `git commit -m "commit message what you updated"` after making any changes to the project. (use double quote " ")
 - `git push origin main` to push all changes to the remote repository so other people can see and update your changes.
