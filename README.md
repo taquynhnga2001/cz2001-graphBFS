@@ -1,7 +1,7 @@
-<h1>CZ2001 ALGORITHMS<h1/>
+<h1>CZ2001 ALGORITHMS<h1>
 <h2>Project 2: Graph Algorithms<h2/>
   
-<b>1. Problem<b/>
+<b>1. Problem</b><br/>
 You are given an undirected unweighted graph G, which represents a city’s road network with n nodes being intersections/endpoints and m edges being roads. Among the n nodes, h of them are hospitals and you are interested in finding, for each node, the distance (i.e., the number of edges in the shortest path) from each node to the nearest hospital. h could take any value from 1 to n. <br/><br/>
 (a) Design an algorithm for computing the distance from each node in G to its nearest hospital. Output the distance and the shortest path for each node to a file. <br/>
 (b) Design an algorithm to complete the task (a) but its time complexity should not depend on the total number of hospitals h. You could skip (b) if your algorithm in (a) already satisfies this complexity constraint. <br/>
