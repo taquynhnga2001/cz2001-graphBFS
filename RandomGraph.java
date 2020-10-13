@@ -50,7 +50,7 @@ public class RandomGraph {
         source.setAttribute("ui.class", "source");
         for (int i = 0; i < numNodes; i++) {
             node = graph.getNode(i);
-            node.addAttribute("ui.style", "text-alignment: under; text-size: 15;");
+            node.addAttribute("ui.style", "text-alignment: under; text-size: 10;");
             node.addAttribute("ui.label", String.valueOf(i));
         }
 

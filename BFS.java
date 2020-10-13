@@ -9,8 +9,8 @@ public class BFS {
     static boolean findHos = false;
 
     public static void main(String[] args) {
-        RandomGraph graph = new RandomGraph(50, 3);
-        graph.markRandHospitals(2);
+        RandomGraph graph = new RandomGraph(100, 5);
+        graph.markRandHospitals(5);
 
         // print adjacency list
         LinkedList<Integer> adjList[] = graph.adjacencyList();
@@ -30,7 +30,7 @@ public class BFS {
         graph.writeHospitalFile();
 
         // algorithm application
-        int sourceVertex = 0;
+        int sourceVertex = 50;
         Stack<Integer> path = breathFS(graph, sourceVertex);
         // clone the path for writing output step
         Stack<Integer> copiedPath = new Stack<Integer>();   
