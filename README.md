@@ -18,5 +18,8 @@ You are given an undirected unweighted graph G, which represents a city’s road
 #### From later access to the project:
 - open cmd and change directory to the project folder `cz2001-lab2`
 - `git pull origin main` to update the latest changes of the project. After that, you can update the project.
-- `git add .` and then `git commit -m "commit message what you updated"` after making any changes to the project. (use double quote " ")
+- `git add .` and then `git commit -m "message for what you updated"` after making any changes to the project. (use double quote " ") (the message, pls be clear for others to follow)
 - `git push origin main` to push all changes to the remote repository so other people can see and update your changes.
+#### To run the program:
+- open the folder and double click on file `run.bat`
+- OR just type `.\run.bat` on cmd
