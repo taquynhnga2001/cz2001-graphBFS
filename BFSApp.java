@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-public class App {
+public class BFSApp {
     private static int distance = 0;
     private static boolean findHos = false;
     private static LinkedList<Integer>[] adjList;
@@ -26,9 +26,9 @@ public class App {
         }
         for (int id=0; id<graph.getNodeCount(); id++) {
             path = bfs(graph, id);
-            App.writeFile(path, id);
+            BFSApp.writeFile(path, id);
             graph.resetMark();
-            App.reset();
+            BFSApp.reset();
         }
     }
 
@@ -69,10 +69,8 @@ public class App {
                 v = preNode[v];         // v is now its pre-incident node
                 distance++;
             }
-            // System.out.println("The distance is " + distance);
-            path.push(v); // push the source node
+            path.push(v);               // push the source node
         }
-            // System.out.println("No way to hospitals!");
         return path;
     }
 
@@ -102,10 +100,23 @@ public class App {
                     // when fromNode = hospital, toNode = -1
                     toNode = fromNode;
                 }
-                line = nodeId + "\t\t\t\t" + toNode + "\t\t\t\t" + distance + "\t\t\t" + pathStr + "\n";
+
+                // write to file
+                if (nodeId >= 1000) {
+                    line = nodeId + "\t\t\t";
+                    if (toNode >= 1000) line += toNode + "\t\t\t" + distance + "\t\t\t" + pathStr + "\n";
+                    else line += toNode + "\t\t\t\t" + distance + "\t\t\t" + pathStr + "\n";
+                }
+                else {
+                    line = nodeId + "\t\t\t\t";
+                    if (toNode >= 1000) line += toNode + "\t\t\t" + distance + "\t\t\t" + pathStr + "\n";
+                    else line += toNode + "\t\t\t\t" + distance + "\t\t\t" + pathStr + "\n";
+                }
             } else {
-                pathStr = "Null";
-                line = nodeId + "\t\t\t\t" + "Null" + "\t\t\t" + "Null" + "\t\t" + pathStr + "\n";
+                // findHos = false
+                pathStr = "---";
+                if (nodeId >= 1000) line = nodeId + "\t\t\t" + "---" + "\t\t\t\t" + "---" + "\t\t\t" + pathStr + "\n";
+                else line = nodeId + "\t\t\t\t" + "---" + "\t\t\t\t" + "---" + "\t\t\t" + pathStr + "\n";
             }
             pw.append(line);
             pw.close();

@@ -4,13 +4,13 @@ import java.util.Stack;
 import java.util.Iterator;
 import java.io.*;
 
-public class BFS {
+public class BFSRandomApp {
     static int distance;
     static boolean findHos = false;
 
     public static void main(String[] args) {
-        RandomGraph graph = new RandomGraph(100, 5);
-        graph.markRandHospitals(10);
+        RandomGraph graph = new RandomGraph(10000, 5);
+        graph.markRandHospitals(100);
 
         // print adjacency list
         LinkedList<Integer> adjList[] = graph.adjacencyList();
@@ -38,7 +38,7 @@ public class BFS {
 
         graph.display(path, sourceVertex);
         // write output to a file
-        BFS.writeFile(copiedPath);
+        BFSRandomApp.writeFile(copiedPath);
     }
 
     public static Stack<Integer> breathFS(RandomGraph graph, int source) {
