@@ -10,7 +10,7 @@ public class BFS {
 
     public static void main(String[] args) {
         RandomGraph graph = new RandomGraph(100, 5);
-        graph.markRandHospitals(5);
+        graph.markRandHospitals(10);
 
         // print adjacency list
         LinkedList<Integer> adjList[] = graph.adjacencyList();
@@ -30,7 +30,7 @@ public class BFS {
         graph.writeHospitalFile();
 
         // algorithm application
-        int sourceVertex = 50;
+        int sourceVertex = 0;
         Stack<Integer> path = breathFS(graph, sourceVertex);
         // clone the path for writing output step
         Stack<Integer> copiedPath = new Stack<Integer>();   
@@ -42,8 +42,8 @@ public class BFS {
     }
 
     public static Stack<Integer> breathFS(RandomGraph graph, int source) {
-        Queue<Integer> L = new LinkedList<>();  // empty queue L for viz
-        graph.mark(source); // mark visited vertex source
+        Queue<Integer> L = new LinkedList<>();  // empty queue L for visited nodes
+        graph.mark(source); // mark visited source nodes
         L.add(source);
         int v = 0;          // vertex in queue L
         int w;              // neighbor of v
@@ -72,7 +72,7 @@ public class BFS {
         }
         if (findHos) {
             distance = 0;
-            // then the hospital is v
+            // now the hospital is v
             while (preNode[v] != v) { // v is not a source node
                 path.push(v);
                 v = preNode[v]; // v is now its pre-incident node
