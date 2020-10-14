@@ -23,3 +23,4 @@ You are given an undirected unweighted graph G, which represents a city’s road
 #### To run the program:
 - open the folder and double click on file `run.bat`
 - OR just type `.\run.bat` on cmd
+- then run file `runBFS.bat` or type `.\runBFS.bat` on cmd
