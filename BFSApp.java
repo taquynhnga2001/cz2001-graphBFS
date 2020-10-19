@@ -36,7 +36,6 @@ public class BFSApp {
     public static Stack<Integer> bfs(MyGraph graph, int source) {
         Queue<Integer> L = new LinkedList<>();  // empty queue L for visited
         ArrayList<Integer> vertexDistance_Op = new ArrayList<Integer>(graph.getNodeCount());
-        int distanceCounter = 0;
         graph.markNode(source); // mark source node visited
         L.add(source);
         int v = 0;          // node in queue L
@@ -69,10 +68,9 @@ public class BFSApp {
             // now the hospital is v
             while (preNode[v] != v) {   // v is not a source node
                 path.push(v);
-                distanceCounter++;
-                vertexDistance_Op.set(v, path.size() - distanceCounter); // setting the nodes in the shortest path to be distance
                 v = preNode[v];         // v is now its pre-incident node
                 distance++;
+                vertexDistance_Op.set(v, path.size() - distance); // setting the nodes in the shortest path to be distance
             }
             path.push(v);               // push the source node
         }
