@@ -16,6 +16,7 @@ public class BFSApp {
             FileWriter fw = new FileWriter("path_output.txt");
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
+            
 
             pw.println("# FromNodeId\tToHospitalId\tDistance\tPath");
             pw.close();
@@ -34,6 +35,8 @@ public class BFSApp {
 
     public static Stack<Integer> bfs(MyGraph graph, int source) {
         Queue<Integer> L = new LinkedList<>();  // empty queue L for visited
+        ArrayList<Integer> vertexDistance_Op = new ArrayList<Integer>(graph.getNodeCount());
+        int distanceCounter = 0;
         graph.markNode(source); // mark source node visited
         L.add(source);
         int v = 0;          // node in queue L
@@ -54,7 +57,7 @@ public class BFSApp {
             iterator = neighbors.iterator();
             while (iterator.hasNext()) {
                 w = iterator.next();
-                if (graph.getMark(w) == 0) {    // vertex w is unvisited
+                if (graph.getMark(w) == 0 && vertexDistance_Op.get(v) == null) {    // vertex w is unvisited
                     graph.markNode(w);          // mark w as visited
                     L.add(w);
                     preNode[w] = v;             // mark the edge vw
@@ -66,6 +69,8 @@ public class BFSApp {
             // now the hospital is v
             while (preNode[v] != v) {   // v is not a source node
                 path.push(v);
+                distanceCounter++;
+                vertexDistance_Op.set(v, path.size() - distanceCounter); // setting the nodes in the shortest path to be distance
                 v = preNode[v];         // v is now its pre-incident node
                 distance++;
             }
