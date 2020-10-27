@@ -2,15 +2,14 @@ import java.util.*;
 import java.io.*;
 
 public class OptimizedBFSApp {
-    private static int distance = 0;
     private static Stack<Integer> path;
     private static HashMap<Integer, Stack<Integer>> paths = new HashMap<>();
     private static HashMap<Integer, Integer> distances = new HashMap<>();
     public static void main(String[] args){
-        int numHos = 2000;
+        int number_of_hospital = 1000;
         String roadFile = "roadNet_CA.txt";
         String hosFile = "fileHos.txt";
-        RandHospital.writeRandHos(numHos, 1965206);
+        RandHospital.writeRandHos(number_of_hospital, 1965206);
         MyGraph graph = new MyGraph(roadFile, hosFile);
 
         try {
