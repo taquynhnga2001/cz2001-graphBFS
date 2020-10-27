@@ -50,15 +50,21 @@ public class MyGraph {
             numHos = Integer.parseInt(inputline.split(" ")[1]); // first line contains the number of hospitals
             inputline = brh.readLine();
 
-            System.out.println("Number of Hospitals: " + numHos);
+            System.out.print("Number of Hospitals: ");
             hospitals = new HashSet<>((int) (numHos / 0.75));
 
             int i=0;
             while (inputline != null) {
+                int h = Integer.parseInt(inputline.strip());
+                if (!adjList.containsKey(h)) {
+                    inputline = brh.readLine();
+                    continue;
+                }
                 hospitals.add(Integer.parseInt(inputline.strip()));     // add HosId to the HashSet
                 inputline = brh.readLine();
                 i++;
             }
+            System.out.println(i);
             brh.close();
 
         } catch (IOException e) {

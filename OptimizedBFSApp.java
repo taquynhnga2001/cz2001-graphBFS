@@ -7,7 +7,11 @@ public class OptimizedBFSApp {
     private static HashMap<Integer, Stack<Integer>> paths = new HashMap<>();
     private static HashMap<Integer, Integer> distances = new HashMap<>();
     public static void main(String[] args){
-        MyGraph graph = new MyGraph("file1.txt", "file2.txt");
+        int numHos = 2000;
+        String roadFile = "roadNet_CA.txt";
+        String hosFile = "fileHos.txt";
+        RandHospital.writeRandHos(numHos, 1965206);
+        MyGraph graph = new MyGraph(roadFile, hosFile);
 
         try {
             FileWriter fw = new FileWriter("path_output_optimized.txt");
@@ -42,6 +46,7 @@ public class OptimizedBFSApp {
         Stack<Integer> path = new Stack<>();  // trace path to hospital
 
         for (int hosId : hospitals) {
+            
             L.add(hosId);
             graph.markNode(hosId);
             paths.put(hosId, new Stack<>());
