@@ -1,20 +1,17 @@
 import java.io.*;
 import java.util.LinkedList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Stack;
-
-import org.graphstream.graph.*;
-import org.graphstream.graph.implementations.*;
-import org.graphstream.algorithm.generator.*;
-import org.graphstream.ui.view.*;
 
 public class MyGraph {
     private int numNodes;
     private int numEdges;
     private int numHos;
-    private LinkedList<Integer> adjList[];  // adjacency list
-    private int[] hospitals;
-    private int[] mark;                     // mark visited nodes
+    private HashMap<Integer, LinkedList<Integer>>  adjList;  // adjacency list
+    private HashSet<Integer> hospitals;
+    private HashMap<Integer, Integer> mark;                  // mark visited nodes
 
     MyGraph(String filePath, String hosPath) {
         // READ AND CONSTRUCT ADJACENCY LIST
@@ -28,17 +25,16 @@ public class MyGraph {
                     if (inputline.substring(2, 6).equals("Node")) {
                         numNodes = Integer.parseInt(inputline.split(" ")[2]);
                         numEdges = Integer.parseInt(inputline.split(" ")[4]);
-                        mark = new int[numNodes];
+                        mark = new HashMap<>((int)(numNodes/0.75));
                         System.out.println("Number of Nodes: " + numNodes);
                         System.out.println("Number of Edges: " + numEdges);
-                        adjList = new LinkedList[numNodes];
-                        for (int i = 0; i < numNodes; i++)
-                            adjList[i] = new LinkedList<>();
+                        adjList = new HashMap<>( (int)(numNodes/0.75) );   // construct capacity for HashMap
                     }
                 } else {
                     int node1 = Integer.parseInt(inputline.strip().split("\t")[0]);
                     int node2 = Integer.parseInt(inputline.strip().split("\t")[1]);
-                    adjList[node1].add(node2);
+                    if (adjList.get(node1) == null) adjList.put(node1, new LinkedList<>());  // construct Linkedlist if not constructed
+                    adjList.get(node1).add(node2); // add node2 to the linkedlist of node1
                 }
                 inputline = br.readLine();
             }
@@ -47,31 +43,21 @@ public class MyGraph {
             System.out.println("Error opening the input " + filePath + " " + e.getMessage());
             System.exit(0);
         }
-        // print adjList
-        // LinkedList<Integer> list;
-        // Iterator<Integer> iterator;
-        // for (int i = 0; i < numNodes; i++) {
-        // System.out.print(i + " - ");
-        // list = adjList[i];
-        // iterator = list.iterator();
-        // while (iterator.hasNext())
-        // System.out.print(iterator.next() + " ");
-        // System.out.println();
-        // }
-
+        
         // READ AND CONSTRUCT HOSPITAL LIST
         try {
             FileReader frh = new FileReader(hosPath);       // file reader hospital
             BufferedReader brh = new BufferedReader(frh);   // buffered reader hospital
             String inputline = brh.readLine();
-            numHos = Integer.parseInt(inputline.split(" ")[1]);
+            numHos = Integer.parseInt(inputline.split(" ")[1]); // first line contains the number of hospitals
             inputline = brh.readLine();
+
             System.out.println("Number of Hospitals: " + numHos);
-            hospitals = new int[numHos];
+            hospitals = new HashSet<>((int) (numHos / 0.75));
 
             int i=0;
             while (inputline != null) {
-                hospitals[i] = Integer.parseInt(inputline.strip());
+                hospitals.add(Integer.parseInt(inputline.strip()));     // add HosId to the HashSet
                 inputline = brh.readLine();
                 i++;
             }
@@ -94,31 +80,23 @@ public class MyGraph {
     }
 
     public void markNode(int id) {
-        mark[id] = 1;
+        mark.put(id, 1);
     }
-    public void unmarkNode(int id) {
-        mark[id] = 0;
-    }
-    public int getMark(int id) {
-        return mark[id];
+    public boolean isVisited(int id) {
+        return mark.containsKey(id);
     }
     public void resetMark(){
-        // reset all mark[] = 0
-        mark = new int[numNodes];
+        mark = new HashMap<>();
     }
 
-    public LinkedList<Integer>[] getAdjcencyList() {
+    public HashMap<Integer, LinkedList<Integer>> getAdjcencyList() {
         return adjList;
     }
-    public int[] getHospitalList() {
+    public HashSet<Integer> getHospitalList() {
         return hospitals;
     }
 
     public boolean isHospital(int id) {
-        for (int hosId : hospitals) {
-            if (id == hosId)
-                return true;
-        }
-        return false;
+        return hospitals.contains(id) ? true : false;
     }
 }

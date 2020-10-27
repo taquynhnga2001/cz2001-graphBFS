@@ -4,8 +4,8 @@ import java.io.*;
 public class BFSApp {
     private static int distance = 0;
     private static boolean findHos = false;
-    private static LinkedList<Integer>[] adjList;
-    private static int[] hospitals;
+    private static HashMap<Integer, LinkedList<Integer>> adjList;
+    private static HashSet<Integer> hospitals;
     private static Stack<Integer> path;
     public static void main(String[] args){
         MyGraph graph = new MyGraph("file1.txt", "file2.txt");
@@ -42,7 +42,7 @@ public class BFSApp {
         Iterator<Integer> iterator;         // to iterate adjacency linked list
         int preNode[] = new int[graph.getNodeCount()]; // record pre-incident node (same as Tree)
         preNode[source] = source;           // pre-incident node of source node is source node
-        Stack<Integer> path = new Stack();  // trace path to hospital
+        Stack<Integer> path = new Stack<>();  // trace path to hospital
 
         while (L.size() != 0) {
             v = L.remove();
@@ -50,11 +50,13 @@ public class BFSApp {
                 findHos = true;
                 break;
             }
-            neighbors = graph.getAdjcencyList()[v];
+            if (!graph.getAdjcencyList().containsKey(v)) break;  // the node doesnt connect to any other nodes
+
+            neighbors = graph.getAdjcencyList().get(v);
             iterator = neighbors.iterator();
             while (iterator.hasNext()) {
                 w = iterator.next();
-                if (graph.getMark(w) == 0) {    // vertex w is unvisited
+                if (!graph.isVisited(w)) {    // vertex w is unvisited
                     graph.markNode(w);          // mark w as visited
                     L.add(w);
                     preNode[w] = v;             // mark the edge vw
