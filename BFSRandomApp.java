@@ -9,13 +9,15 @@ public class BFSRandomApp {
     static boolean findHos = false;
 
     public static void main(String[] args) {
-        RandomGraph graph = new RandomGraph(100, 3);
-        graph.markRandHospitals(5);
+        RandomGraph graph = new RandomGraph(10000, 5);
+        graph.markRandHospitals(100);
 
         // print adjacency list
         LinkedList<Integer> adjList[] = graph.adjacencyList();
         LinkedList<Integer> list;
         Iterator<Integer> iterator;
+
+        long fromTime = System.currentTimeMillis();
         for (int i = 0; i < graph.getNodeCount(); i++) {
             System.out.print(i + " - ");
             list = adjList[i];
@@ -39,6 +41,10 @@ public class BFSRandomApp {
         graph.display(path, sourceVertex);
         // write output to a file
         BFSRandomApp.writeFile(copiedPath);
+
+        long toTime = System.currentTimeMillis();
+        long duration = toTime - fromTime;
+        System.out.println(">>> Running time: " + duration + " milliseconds");
     }
 
     public static Stack<Integer> breathFS(RandomGraph graph, int source) {

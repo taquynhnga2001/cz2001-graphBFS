@@ -56,7 +56,7 @@ public class OptimizedBFSApp {
             iterator = neighbors.iterator();
             while (iterator.hasNext()) {
                 w = iterator.next();
-                if (!graph.isVisited(w)) {    // vertex w is unvisited
+                if (!graph.isVisited(w)) {      // vertex w is unvisited
                     graph.markNode(w);          // mark w as visited
                     L.add(w);
                     distances.put(w, distances.get(v) + 1);

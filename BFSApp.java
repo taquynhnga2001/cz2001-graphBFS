@@ -4,13 +4,9 @@ import java.io.*;
 public class BFSApp {
     private static int distance = 0;
     private static boolean findHos = false;
-    // private static HashMap<Integer, LinkedList<Integer>> adjList;
-    // private static HashSet<Integer> hospitals;
     private static Stack<Integer> path;
     public static void main(String[] args){
         MyGraph graph = new MyGraph("file1.txt", "file2.txt");
-        // adjList = graph.getAdjcencyList();
-        // hospitals = graph.getHospitalList();
 
         try {
             FileWriter fw = new FileWriter("path_output.txt");
@@ -24,12 +20,16 @@ public class BFSApp {
             e.printStackTrace();
             System.exit(0);
         }
+        long fromTime = System.currentTimeMillis();
         for (int id=0; id<graph.getNodeCount(); id++) {
             path = bfs(graph, id);
             BFSApp.writeFile(path, id);
             graph.resetMark();
             BFSApp.reset();
         }
+        long toTime = System.currentTimeMillis();
+        long duration = toTime - fromTime;
+        System.out.println(">>> Running time: " + duration + " milliseconds");
     }
 
     public static Stack<Integer> bfs(MyGraph graph, int source) {
