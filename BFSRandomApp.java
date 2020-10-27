@@ -51,7 +51,7 @@ public class BFSRandomApp {
         Iterator<Integer> iterator;         // to iterate adjacency linked list
         int preNode[] = new int[graph.getNodeCount()]; // record pre-incident node (same as Tree)
         preNode[source] = source;           // pre-incident node of source node is source node
-        Stack<Integer> path = new Stack();  // trace path to hospital
+        Stack<Integer> path = new Stack<>();  // trace path to hospital
 
         while (L.size() != 0) {
             v = L.remove();

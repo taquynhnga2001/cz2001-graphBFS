@@ -2,8 +2,6 @@ import java.io.*;
 import java.util.LinkedList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Stack;
 
 public class MyGraph {
     private int numNodes;

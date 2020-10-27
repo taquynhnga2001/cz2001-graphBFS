@@ -4,13 +4,13 @@ import java.io.*;
 public class BFSApp {
     private static int distance = 0;
     private static boolean findHos = false;
-    private static HashMap<Integer, LinkedList<Integer>> adjList;
-    private static HashSet<Integer> hospitals;
+    // private static HashMap<Integer, LinkedList<Integer>> adjList;
+    // private static HashSet<Integer> hospitals;
     private static Stack<Integer> path;
     public static void main(String[] args){
         MyGraph graph = new MyGraph("file1.txt", "file2.txt");
-        adjList = graph.getAdjcencyList();
-        hospitals = graph.getHospitalList();
+        // adjList = graph.getAdjcencyList();
+        // hospitals = graph.getHospitalList();
 
         try {
             FileWriter fw = new FileWriter("path_output.txt");
@@ -40,8 +40,8 @@ public class BFSApp {
         int w;              // neighbor of v
         LinkedList<Integer> neighbors;      // adjacent nodes with v
         Iterator<Integer> iterator;         // to iterate adjacency linked list
-        int preNode[] = new int[graph.getNodeCount()]; // record pre-incident node (same as Tree)
-        preNode[source] = source;           // pre-incident node of source node is source node
+        HashMap<Integer, Integer> preNode = new HashMap<>(); // record pre-incident node (same as Tree)
+        preNode.put(source, source);           // pre-incident node of source node is source node
         Stack<Integer> path = new Stack<>();  // trace path to hospital
 
         while (L.size() != 0) {
@@ -59,16 +59,16 @@ public class BFSApp {
                 if (!graph.isVisited(w)) {    // vertex w is unvisited
                     graph.markNode(w);          // mark w as visited
                     L.add(w);
-                    preNode[w] = v;             // mark the edge vw
+                    preNode.put(w, v);             // mark the edge vw
                 }
             }
         }
         if (findHos) {
             distance = 0;
             // now the hospital is v
-            while (preNode[v] != v) {   // v is not a source node
+            while (preNode.get(v) != v) {   // v is not a source node
                 path.push(v);
-                v = preNode[v];         // v is now its pre-incident node
+                v = preNode.get(v);         // v is now its pre-incident node
                 distance++;
             }
             path.push(v);               // push the source node
