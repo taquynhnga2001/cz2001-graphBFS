@@ -7,8 +7,9 @@ public class OptimizedBFSApp {
     private static HashMap<Integer, Integer> distances = new HashMap<>();
     public static void main(String[] args){
         int number_of_hospital = 1000;
-        String roadFile = "roadNet_CA.txt";
-        String hosFile = "fileHos.txt";
+        // String roadFile = "roadNet_CA.txt";
+        String roadFile = "file1.txt";
+        String hosFile = "file2.txt";
         RandHospital.writeRandHos(number_of_hospital, 1965206);
         MyGraph graph = new MyGraph(roadFile, hosFile);
 
@@ -29,7 +30,7 @@ public class OptimizedBFSApp {
         writeFile(paths);
         long toTime = System.currentTimeMillis();
         long duration = toTime - fromTime;
-        System.out.println(">>> Running time: " + duration + " milliseconds");
+        System.out.println(">>> Running time: " + duration + " milliseconds ~ " + duration/1000 + " seconds");
     }
 
     public static HashMap<Integer, Stack<Integer>> bfs(MyGraph graph) {
