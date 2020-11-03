@@ -9,8 +9,8 @@ public class BFSRandomApp {
     static boolean findHos = false;
 
     public static void main(String[] args) {
-        RandomGraph graph = new RandomGraph(50, 5);
-        graph.markRandHospitals(5);
+        RandomGraph graph = new RandomGraph(10000, 5);
+        graph.markRandHospitals(100);
 
         // print adjacency list
         LinkedList<Integer> adjList[] = graph.adjacencyList();
@@ -18,14 +18,14 @@ public class BFSRandomApp {
         Iterator<Integer> iterator;
 
         long fromTime = System.currentTimeMillis();
-        for (int i = 0; i < graph.getNodeCount(); i++) {
-            System.out.print(i + " - ");
-            list = adjList[i];
-            iterator = list.iterator();
-            while (iterator.hasNext())
-                System.out.print(iterator.next() + " ");
-            System.out.println();
-        }
+        // for (int i = 0; i < graph.getNodeCount(); i++) {
+        //     // System.out.print(i + " - ");
+        //     list = adjList[i];
+        //     iterator = list.iterator();
+        //     while (iterator.hasNext())
+        //         System.out.print(iterator.next() + " ");
+        //     System.out.println();
+        // }
 
         // write file1: graph structure and file2: hospital Id
         graph.writeGraphStructure(adjList);

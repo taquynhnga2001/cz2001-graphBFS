@@ -8,22 +8,30 @@ public class PartD {
     private static HashMap<Integer, Integer> numVisited = new HashMap<>();
 
     public static void main(String[] args) {
-        int NUMBER_OF_HOSPITALS = 10000;
-        String ROAD_FILE = "roadNet_CA.txt";
-        String HOSPITAL_FILE = "fileHos.txt";
-        int TOP_NEAREST_K = 5;
+        // int NUMBER_OF_HOSPITALS = 10000;
+        // String ROAD_FILE = "roadNet_CA.txt";
+        // String HOSPITAL_FILE = "fileHos.txt";
+        // int TOP_NEAREST_K = 8;
+        // String outputFile = "";
 
-        // String ROAD_FILE = "file1.txt";
-        // String HOSPITAL_FILE = "file2.txt";
-        // int TOP_NEAREST_K = 5;
-        RandHospital.writeRandHos(NUMBER_OF_HOSPITALS, 1965206);
+        String ROAD_FILE = args[0];
+        String HOSPITAL_FILE = args[1];
+        String outputFile = args[2];
+        String makeRandHos = args[3];
+        int TOP_NEAREST_K = Integer.parseInt(args[4]);
+
+        if (makeRandHos.equals("true")) {
+            Scanner sc = new Scanner(System.in);
+            System.out.print("How many random hospitals that you want to generate (approximately)? ");
+            int number_of_hospital = Integer.parseInt(sc.nextLine());
+            RandHospital.writeRandHos(number_of_hospital, 1965206);
+        }
 
         System.out.println("\n===== TOP-" + TOP_NEAREST_K + " NEAREST HOSPITALS =====");
-        
         MyGraph graph = new MyGraph(ROAD_FILE, HOSPITAL_FILE);
 
         try {
-            FileWriter fw = new FileWriter("path_output_D.txt");
+            FileWriter fw = new FileWriter(outputFile);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
 
@@ -36,10 +44,10 @@ public class PartD {
         }
         long fromTime = System.currentTimeMillis();
         toHos = bfs(graph, TOP_NEAREST_K);
-        writeFile(toHos, TOP_NEAREST_K);
+        writeFile(toHos, TOP_NEAREST_K, outputFile);
         long toTime = System.currentTimeMillis();
         long duration = toTime - fromTime;
-        System.out.println(">>> Running time: " + duration + " milliseconds ~ " + duration/1000 + " seconds");
+        System.out.println(">>> Running time: " + duration + " milliseconds ~ " + (double)duration/1000 + " seconds");
     }
 
     public static HashMap<Integer, Integer[]> bfs(MyGraph graph, int k) {
@@ -83,6 +91,7 @@ public class PartD {
                     toHos.put(w, new Integer[k]);
                 }
                 int round = numVisited.get(w);
+                // System.out.println("tohosw " + toHos.get(w) + "tohosvint " + toHos.get(v[0])[v[1]]);
                 if (round < k-1 && !contains(toHos.get(w), toHos.get(v[0])[v[1]])) {
                     round += 1;
                     numVisited.put(w, round);
@@ -98,9 +107,9 @@ public class PartD {
         return toHos;
     }
 
-    public static void writeFile(HashMap<Integer, Integer[]> toHosMap, int top_k) {
+    public static void writeFile(HashMap<Integer, Integer[]> toHosMap, int top_k, String outputFile) {
         try {
-            FileWriter fw = new FileWriter("path_output_D.txt", true);
+            FileWriter fw = new FileWriter(outputFile, true);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
             String line = new String();

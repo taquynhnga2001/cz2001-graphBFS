@@ -2,20 +2,27 @@ import java.util.*;
 import java.io.*;
 
 public class OptimizedBFSApp {
-    private static Stack<Integer> path;
     private static HashMap<Integer, Stack<Integer>> paths = new HashMap<>();
     private static HashMap<Integer, Integer> distances = new HashMap<>();
     public static void main(String[] args){
         // int number_of_hospital = 1000;
-        String roadFile = "roadNet_CA.txt";
-        // String roadFile = "file1.txt";
-        // String hosFile = "file2.txt";
-        String hosFile = "fileHos.txt";
-        // RandHospital.writeRandHos(number_of_hospital, 1965206);
+        // String roadFile = "roadNet_CA.txt";
+        String roadFile = args[0];
+        String hosFile = args[1];
+        String outputFile = args[2];
+        String makeRandHos = args[3];
+        // String hosFile = "fileHos.txt";
+        if (makeRandHos.equals("true")) {
+            Scanner sc = new Scanner(System.in);
+            System.out.print("How many random hospitals that you want to generate (approximately)? ");
+            int number_of_hospital = Integer.parseInt(sc.nextLine());
+            RandHospital.writeRandHos(number_of_hospital, 1965206);
+        }
+        System.out.println("\n===== RESULT FINDING THE SHORTEST PATH =====");
         MyGraph graph = new MyGraph(roadFile, hosFile);
 
         try {
-            FileWriter fw = new FileWriter("path_output_optimized.txt");
+            FileWriter fw = new FileWriter(outputFile);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
 
@@ -28,10 +35,10 @@ public class OptimizedBFSApp {
         }
         long fromTime = System.currentTimeMillis();
         paths = bfs(graph);
-        writeFile(paths);
+        writeFile(paths, outputFile);
         long toTime = System.currentTimeMillis();
         long duration = toTime - fromTime;
-        System.out.println(">>> Running time: " + duration + " milliseconds ~ " + duration/1000 + " seconds");
+        System.out.println(">>> Running time: " + duration + " milliseconds ~ " + (double)duration/1000 + " seconds");
     }
 
     public static HashMap<Integer, Stack<Integer>> bfs(MyGraph graph) {
@@ -74,9 +81,9 @@ public class OptimizedBFSApp {
         return paths;
     }
 
-    public static void writeFile(HashMap<Integer, Stack<Integer>> paths) {
+    public static void writeFile(HashMap<Integer, Stack<Integer>> paths, String outputFile) {
         try {
-            FileWriter fw = new FileWriter("path_output_optimized.txt", true);
+            FileWriter fw = new FileWriter(outputFile, true);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
             String line = new String();
