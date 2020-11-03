@@ -8,11 +8,14 @@ public class PartD {
     private static HashMap<Integer, Integer> numVisited = new HashMap<>();
 
     public static void main(String[] args) {
-        int NUMBER_OF_HOSPITALS = 100000;
+        int NUMBER_OF_HOSPITALS = 10000;
         String ROAD_FILE = "roadNet_CA.txt";
         String HOSPITAL_FILE = "fileHos.txt";
-        int TOP_NEAREST_K = 4;
-        // String roadFile = "file1.txt";
+        int TOP_NEAREST_K = 5;
+
+        // String ROAD_FILE = "file1.txt";
+        // String HOSPITAL_FILE = "file2.txt";
+        // int TOP_NEAREST_K = 5;
         RandHospital.writeRandHos(NUMBER_OF_HOSPITALS, 1965206);
 
         System.out.println("\n===== TOP-" + TOP_NEAREST_K + " NEAREST HOSPITALS =====");
@@ -33,7 +36,7 @@ public class PartD {
         }
         long fromTime = System.currentTimeMillis();
         toHos = bfs(graph, TOP_NEAREST_K);
-        writeFile(toHos);
+        writeFile(toHos, TOP_NEAREST_K);
         long toTime = System.currentTimeMillis();
         long duration = toTime - fromTime;
         System.out.println(">>> Running time: " + duration + " milliseconds ~ " + duration/1000 + " seconds");
@@ -44,15 +47,17 @@ public class PartD {
         HashMap<Integer, LinkedList<Integer>> adjList = graph.getAdjcencyList();
         HashMap<Integer, Integer[]> toHos = new HashMap<>();
 
-        Queue<Integer> L = new LinkedList<>(); // empty queue L for visited
-        int v = 0; // node in queue L
+        Queue<Integer[]> L = new LinkedList<>(); // empty queue L for visited
+        Integer[] v = new Integer[2]; // node in queue L, store [nodeId, order-in-queue]
         int w; // neighbor of v
         LinkedList<Integer> neighbors; // adjacent nodes with v
         Iterator<Integer> iterator; // to iterate adjacency linked list
 
         for (int hosId : hospitals) {
-
-            L.add(hosId);
+            Integer[] addHos = new Integer[2];
+            addHos[0] = hosId;
+            addHos[1] = k-1;
+            L.add(addHos);
             graph.markNode(hosId);
             toHos.put(hosId, new Integer[k]);
             distances.put(hosId, new Integer[k]);
@@ -64,12 +69,12 @@ public class PartD {
         }
 
         while (L.size() != 0) {
-            v = L.remove();
+            v = L.remove();     // v is Integer[2]
 
-            neighbors = adjList.get(v);
+            neighbors = adjList.get(v[0]);
             iterator = neighbors.iterator();
             while (iterator.hasNext()) {
-                w = iterator.next();
+                w = iterator.next();  // w is an int
 
                 if (!numVisited.containsKey(w)) {
                     numVisited.put(w, -1); // first round as 0
@@ -78,20 +83,22 @@ public class PartD {
                     toHos.put(w, new Integer[k]);
                 }
                 int round = numVisited.get(w);
-                if (round < k-1 && round < numVisited.get(v)) {
+                if (round < k-1 && !contains(toHos.get(w), toHos.get(v[0])[v[1]])) {
                     round += 1;
                     numVisited.put(w, round);
-                    L.add(w);
-                    distances.get(w)[round] = 0;
-                    distances.get(w)[round] = distances.get(v)[round] + 1;
-                    toHos.get(w)[round] = toHos.get(v)[round];
+                    Integer[] addW = new Integer[2];
+                    addW[0] = w;
+                    addW[1] = round;
+                    L.add(addW);
+                    distances.get(w)[round] = distances.get(v[0])[v[1]] + 1;
+                    toHos.get(w)[round] = toHos.get(v[0])[v[1]];
                 }
             }
         }
         return toHos;
     }
 
-    public static void writeFile(HashMap<Integer, Integer[]> toHosMap) {
+    public static void writeFile(HashMap<Integer, Integer[]> toHosMap, int top_k) {
         try {
             FileWriter fw = new FileWriter("path_output_D.txt", true);
             BufferedWriter bw = new BufferedWriter(fw);
@@ -99,6 +106,9 @@ public class PartD {
             String line = new String();
             int toHos;
             int distance;
+
+            String breakline = "";
+            if (top_k>1) breakline = "\n";
 
             for (int fromId : toHosMap.keySet()) {
                 int k = numVisited.get(fromId) + 1;
@@ -120,9 +130,9 @@ public class PartD {
                         else
                             line += toHos + "\t\t\t\t" + top + "\t\t" + distance + "\n";
                     }
-                    // toNode = -1; // reset toNode
                     pw.append(line);
                 }
+                pw.append(breakline);
             }
 
             pw.close();
@@ -131,5 +141,11 @@ public class PartD {
             e.printStackTrace();
             System.exit(0);
         }
+    }
+    public static boolean contains(Integer[] array, int key) {
+        for (Integer i : array) {
+            if (i != null && key==(int)i) return true;
+        }
+        return false;
     }
 }

@@ -6,11 +6,12 @@ public class OptimizedBFSApp {
     private static HashMap<Integer, Stack<Integer>> paths = new HashMap<>();
     private static HashMap<Integer, Integer> distances = new HashMap<>();
     public static void main(String[] args){
-        int number_of_hospital = 1000;
-        // String roadFile = "roadNet_CA.txt";
-        String roadFile = "file1.txt";
-        String hosFile = "file2.txt";
-        RandHospital.writeRandHos(number_of_hospital, 1965206);
+        // int number_of_hospital = 1000;
+        String roadFile = "roadNet_CA.txt";
+        // String roadFile = "file1.txt";
+        // String hosFile = "file2.txt";
+        String hosFile = "fileHos.txt";
+        // RandHospital.writeRandHos(number_of_hospital, 1965206);
         MyGraph graph = new MyGraph(roadFile, hosFile);
 
         try {
@@ -46,7 +47,6 @@ public class OptimizedBFSApp {
         Stack<Integer> path = new Stack<>();  // trace path to hospital
 
         for (int hosId : hospitals) {
-            
             L.add(hosId);
             graph.markNode(hosId);
             paths.put(hosId, new Stack<>());
@@ -56,7 +56,6 @@ public class OptimizedBFSApp {
 
         while (L.size() != 0) {
             v = L.remove();
-
             neighbors = adjList.get(v);
             iterator = neighbors.iterator();
             while (iterator.hasNext()) {

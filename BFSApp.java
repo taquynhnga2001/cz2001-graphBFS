@@ -43,13 +43,15 @@ public class BFSApp {
         HashMap<Integer, Integer> preNode = new HashMap<>(); // record pre-incident node (same as Tree)
         preNode.put(source, source);           // pre-incident node of source node is source node
         Stack<Integer> path = new Stack<>();  // trace path to hospital
+        boolean fromHos = false;
+        if (graph.isHospital(source)) fromHos = true;
 
         while (L.size() != 0) {
             v = L.remove();
-            if (graph.isHospital(v)) {
+            if (graph.isHospital(v) && !fromHos) {
                 findHos = true;
                 break;
-            }
+            } else fromHos = false;
             if (!graph.getAdjcencyList().containsKey(v)) break;  // the node doesnt connect to any other nodes
 
             neighbors = graph.getAdjcencyList().get(v);

@@ -9,8 +9,8 @@ public class BFSRandomApp {
     static boolean findHos = false;
 
     public static void main(String[] args) {
-        RandomGraph graph = new RandomGraph(20000, 5);
-        graph.markRandHospitals(200);
+        RandomGraph graph = new RandomGraph(50, 5);
+        graph.markRandHospitals(5);
 
         // print adjacency list
         LinkedList<Integer> adjList[] = graph.adjacencyList();
