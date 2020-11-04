@@ -8,11 +8,6 @@ public class PartD {
     private static HashMap<Integer, Integer> numVisited = new HashMap<>();
 
     public static void main(String[] args) {
-        // int NUMBER_OF_HOSPITALS = 10000;
-        // String ROAD_FILE = "roadNet_CA.txt";
-        // String HOSPITAL_FILE = "fileHos.txt";
-        // int TOP_NEAREST_K = 8;
-        // String outputFile = "";
         toHos = new HashMap<>();
         distances = new HashMap<>();
         numVisited = new HashMap<>();
