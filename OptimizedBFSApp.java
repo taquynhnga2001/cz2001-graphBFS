@@ -18,6 +18,7 @@ public class OptimizedBFSApp {
             int number_of_hospital = Integer.parseInt(sc.nextLine());
             RandHospital.writeRandHos(number_of_hospital, 1965206);
         }
+        
         System.out.println("\n===== RESULT FINDING THE SHORTEST PATH =====");
         MyGraph graph = new MyGraph(roadFile, hosFile);
 

@@ -27,6 +27,7 @@ public class UserInterface {
             }
         } while (!choice.equals("x"));
     }
+
     public static void PartA() {
         Scanner sc = new Scanner(System.in);
         String choice;
@@ -103,8 +104,8 @@ public class UserInterface {
                 }
             }
         } while (!choice.equals("x"));
-        
     }
+
     public static void PartB() {
         Scanner sc = new Scanner(System.in);
         String choice;
@@ -122,71 +123,71 @@ public class UserInterface {
             choice = sc.nextLine().toLowerCase();
             switch (choice) {
                 case "a": {
-                    String[] args = new String[5];
+                    String[] args = new String[4];
                     String roadFile = "file1-1k.txt";
                     String hosFile = "file2-1k.txt";
                     String outputFile = "output/output-b-1k.txt";
                     String makeRandHos = "false";
-                    System.out.print("Top-k nearest paths. k = ");
-                    String k = sc.nextLine();
+                    // System.out.print("Top-k nearest paths. k = ");
+                    // String k = sc.nextLine();
                     args[0] = roadFile;
                     args[1] = hosFile;
                     args[2] = outputFile;
                     args[3] = makeRandHos;
-                    args[4] = k;
+                    // args[4] = k;
                     PartD.main(args);
                     System.out.println(">>> Output file is in '" + outputFile + "'");
                     break;
                 }
                 case "b": {
-                    String[] args = new String[5];
+                    String[] args = new String[4];
                     String roadFile = "file1-10k.txt";
                     String hosFile = "file2-10k.txt";
                     String outputFile = "output/output-b-10k.txt";
                     String makeRandHos = "false";
-                    System.out.print("Top-k nearest paths. k = ");
-                    String k = sc.nextLine();
+                    // System.out.print("Top-k nearest paths. k = ");
+                    // String k = sc.nextLine();
                     args[0] = roadFile;
                     args[1] = hosFile;
                     args[2] = outputFile;
                     args[3] = makeRandHos;
-                    args[4] = k;
+                    // args[4] = k;
                     PartD.main(args);
                     System.out.println(">>> Output file is in '" + outputFile + "'");
                     break;
                 }
                 case "c": {
-                    String[] args = new String[5];
+                    String[] args = new String[4];
                     String roadFile = "roadNet_CA.txt";
                     String hosFile = "fileHos.txt";
                     String outputFile = "output/output-b-real-data.txt";
                     String makeRandHos = "true";
-                    System.out.print("Top-k nearest paths. k = ");
-                    String k = sc.nextLine();
+                    // System.out.print("Top-k nearest paths. k = ");
+                    // String k = sc.nextLine();
                     args[0] = roadFile;
                     args[1] = hosFile;
                     args[2] = outputFile;
                     args[3] = makeRandHos;
-                    args[4] = k;
+                    // args[4] = k;
                     PartD.main(args);
                     System.out.println(">>> Output file is in '" + outputFile + "'");
                     break;
                 }
                 case "d": {
-                    String[] args = new String[5];
+                    String[] args = new String[4];
                     System.out.print("Absolute file path of graph structure: ");
                     String roadFile = sc.nextLine();
                     System.out.print("Absolute file path of hospitals: ");
                     String hosFile = sc.nextLine();
                     String outputFile = "output/output-b-own-data.txt";
                     String makeRandHos = "false";
-                    System.out.print("Top-k nearest paths. k = ");
-                    String k = sc.nextLine();
+                    // System.out.print("Top-k nearest paths. k = ");
+                    // String k = sc.nextLine();
                     args[0] = roadFile;
                     args[1] = hosFile;
                     args[2] = outputFile;
                     args[3] = makeRandHos;
-                    args[4] = k;
+                    // args[4] = k;
                     PartD.main(args);
                     System.out.println(">>> Output file is in '" + outputFile + "'");
                     break;

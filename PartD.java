@@ -13,15 +13,23 @@ public class PartD {
         // String HOSPITAL_FILE = "fileHos.txt";
         // int TOP_NEAREST_K = 8;
         // String outputFile = "";
+        toHos = new HashMap<>();
+        distances = new HashMap<>();
+        numVisited = new HashMap<>();
 
         String ROAD_FILE = args[0];
         String HOSPITAL_FILE = args[1];
         String outputFile = args[2];
         String makeRandHos = args[3];
-        int TOP_NEAREST_K = Integer.parseInt(args[4]);
+        // int TOP_NEAREST_K = Integer.parseInt(args[4]);
+
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Top-k nearest paths. k = ");
+        String k = sc.nextLine();
+        int TOP_NEAREST_K = Integer.parseInt(k);
 
         if (makeRandHos.equals("true")) {
-            Scanner sc = new Scanner(System.in);
+            sc = new Scanner(System.in);
             System.out.print("How many random hospitals that you want to generate (approximately)? ");
             int number_of_hospital = Integer.parseInt(sc.nextLine());
             RandHospital.writeRandHos(number_of_hospital, 1965206);
