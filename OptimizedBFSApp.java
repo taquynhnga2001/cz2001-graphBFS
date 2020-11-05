@@ -5,13 +5,10 @@ public class OptimizedBFSApp {
     private static HashMap<Integer, Stack<Integer>> paths = new HashMap<>();
     private static HashMap<Integer, Integer> distances = new HashMap<>();
     public static void main(String[] args){
-        // int number_of_hospital = 1000;
-        // String roadFile = "roadNet_CA.txt";
         String roadFile = args[0];
         String hosFile = args[1];
         String outputFile = args[2];
         String makeRandHos = args[3];
-        // String hosFile = "fileHos.txt";
         if (makeRandHos.equals("true")) {
             Scanner sc = new Scanner(System.in);
             System.out.print("How many random hospitals that you want to generate (approximately)? ");
@@ -20,6 +17,8 @@ public class OptimizedBFSApp {
         }
         
         System.out.println("\n===== RESULT FINDING THE SHORTEST PATH =====");
+
+        long fromTime = System.currentTimeMillis();
         MyGraph graph = new MyGraph(roadFile, hosFile);
 
         try {
@@ -34,11 +33,10 @@ public class OptimizedBFSApp {
             e.printStackTrace();
             System.exit(0);
         }
-        long fromTime = System.currentTimeMillis();
         paths = bfs(graph);
-        writeFile(paths, outputFile);
         long toTime = System.currentTimeMillis();
         long duration = toTime - fromTime;
+        writeFile(paths, outputFile);
         System.out.println(">>> Running time: " + duration + " milliseconds ~ " + (double)duration/1000 + " seconds");
     }
 

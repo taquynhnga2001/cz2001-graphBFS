@@ -1,6 +1,7 @@
 import java.util.*;
 import java.io.*;
 
+/**Brute force BFS: O(V^2+E) */
 public class BFSApp {
     private static int distance = 0;
     private static boolean findHos = false;

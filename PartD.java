@@ -31,6 +31,8 @@ public class PartD {
         }
 
         System.out.println("\n===== TOP-" + TOP_NEAREST_K + " NEAREST HOSPITALS =====");
+
+        long fromTime = System.currentTimeMillis();
         MyGraph graph = new MyGraph(ROAD_FILE, HOSPITAL_FILE);
 
         try {
@@ -45,11 +47,11 @@ public class PartD {
             e.printStackTrace();
             System.exit(0);
         }
-        long fromTime = System.currentTimeMillis();
+        
         toHos = bfs(graph, TOP_NEAREST_K);
-        writeFile(toHos, TOP_NEAREST_K, outputFile);
         long toTime = System.currentTimeMillis();
         long duration = toTime - fromTime;
+        writeFile(toHos, TOP_NEAREST_K, outputFile);
         System.out.println(">>> Running time: " + duration + " milliseconds ~ " + (double)duration/1000 + " seconds");
     }
 
@@ -67,16 +69,19 @@ public class PartD {
         for (int hosId : hospitals) {
             Integer[] addHos = new Integer[2];
             addHos[0] = hosId;
-            addHos[1] = k-1;
+            addHos[1] = 0;
             L.add(addHos);
             graph.markNode(hosId);
             toHos.put(hosId, new Integer[k]);
             distances.put(hosId, new Integer[k]);
-            for (int count = 0; count < k; count++) {
-                toHos.get(hosId)[count] = hosId;
-                distances.get(hosId)[count] = 0;
-            }
-            numVisited.put(hosId, k-1);
+            // for (int count = 0; count < k; count++) {
+            //     toHos.get(hosId)[count] = hosId;
+            //     distances.get(hosId)[count] = 0;
+            // }
+            toHos.get(hosId)[0] = hosId;
+            distances.get(hosId)[0] = 0;
+            numVisited.put(hosId, 0);
+            // numVisited.put(hosId, k-1);
         }
 
         while (L.size() != 0) {
@@ -94,7 +99,6 @@ public class PartD {
                     toHos.put(w, new Integer[k]);
                 }
                 int round = numVisited.get(w);
-                // System.out.println("tohosw " + toHos.get(w) + "tohosvint " + toHos.get(v[0])[v[1]]);
                 if (round < k-1 && !contains(toHos.get(w), toHos.get(v[0])[v[1]])) {
                     round += 1;
                     numVisited.put(w, round);

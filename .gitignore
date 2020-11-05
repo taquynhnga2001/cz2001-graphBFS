@@ -1,11 +1,9 @@
 *.py
 *.class
 *.txt
-runD2.bat
-wrongPartD.*
 !file1-1k.txt
 !file2-1k.txt
 !file1-10k.txt
 !file2-10k.txt
 !fileHos.txt
-output/*
+DSAI2_GRP3_P2
