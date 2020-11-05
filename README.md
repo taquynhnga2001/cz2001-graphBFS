@@ -52,12 +52,12 @@ For the 'Problem (b) : Find the Top-k nearest hospitals from all nodes', `k` mus
 -------------------------------------------------------------------------------
 The output files are stored in the folder `output` (in this directory). The name of the output file willbe mentioned again when running the code. Or you can read the list below to know the output file name:
 - Problem (a) : 
-+ data set (a) : `output-a-1k.txt`
-+ data set (b) : `output-a-10k.txt`
-+ data set (c) : `output-a-real-data.txt`
-+ data set (d) : `output-a-own-data.txt`
+  + data set (a) : `output-a-1k.txt`
+  + data set (b) : `output-a-10k.txt`
+  + data set (c) : `output-a-real-data.txt`
+  + data set (d) : `output-a-own-data.txt`
 - Problem (b) : 
-+ data set (a) : `output-b-1k.txt`
-+ data set (b) : `output-b-10k.txt`
-+ data set (c) : `output-b-real-data.txt`
-+ data set (d) : `output-b-own-data.txt`
+  + data set (a) : `output-b-1k.txt`
+  + data set (b) : `output-b-10k.txt`
+  + data set (c) : `output-b-real-data.txt`
+  + data set (d) : `output-b-own-data.txt`
