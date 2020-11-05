@@ -16,7 +16,6 @@ public class PartD {
         String HOSPITAL_FILE = args[1];
         String outputFile = args[2];
         String makeRandHos = args[3];
-        // int TOP_NEAREST_K = Integer.parseInt(args[4]);
 
         Scanner sc = new Scanner(System.in);
         System.out.print("Top-k nearest paths. k = ");
@@ -128,6 +127,7 @@ public class PartD {
 
             for (int fromId : toHosMap.keySet()) {
                 int k = numVisited.get(fromId) + 1;
+                
                 for (int i = 0; i < k; i++) {
                     toHos = toHosMap.get(fromId)[i];
                     int top = i+1;
