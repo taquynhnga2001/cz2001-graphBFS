@@ -21,6 +21,8 @@ public class PartD {
         String HOSPITAL_FILE = args[1];
         String outputFile = args[2];
         String makeRandHos = args[3];
+
+
         // int TOP_NEAREST_K = Integer.parseInt(args[4]);
 
         Scanner sc = new Scanner(System.in);
@@ -72,16 +74,19 @@ public class PartD {
         for (int hosId : hospitals) {
             Integer[] addHos = new Integer[2];
             addHos[0] = hosId;
-            addHos[1] = k-1;
+            // addHos[1] = k-1;
+            addHos[1] = 0;
             L.add(addHos);
             graph.markNode(hosId);
             toHos.put(hosId, new Integer[k]);
             distances.put(hosId, new Integer[k]);
-            for (int count = 0; count < k; count++) {
-                toHos.get(hosId)[count] = hosId;
-                distances.get(hosId)[count] = 0;
-            }
-            numVisited.put(hosId, k-1);
+            // for (int count = 0; count < k; count++) {
+            //     toHos.get(hosId)[count] = hosId;
+            //     distances.get(hosId)[count] = 0;
+            // }
+            toHos.get(hosId)[0] = hosId;
+            distances.get(hosId)[0] = 0;
+            numVisited.put(hosId, 0);
         }
 
         while (L.size() != 0) {
@@ -129,6 +134,7 @@ public class PartD {
 
             for (int fromId : toHosMap.keySet()) {
                 int k = numVisited.get(fromId) + 1;
+                
                 for (int i = 0; i < k; i++) {
                     toHos = toHosMap.get(fromId)[i];
                     int top = i+1;
