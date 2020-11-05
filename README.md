@@ -24,7 +24,7 @@ You are given an undirected unweighted graph G, which represents a city’s road
 - open the folder and double click on file `run.bat`
 - OR just type `.\run.bat` on cmd
 
-## Intruction to run the programmes
+## Intruction to run the programme
 The interface to run the project algorithms is in the file `UserInterface.java`. Use terminal/cmd to compile and run the code:
 `javac UserInterface.java`
 `java UserInterface`
